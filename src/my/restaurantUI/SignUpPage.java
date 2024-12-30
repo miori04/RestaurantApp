@@ -84,6 +84,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(410, 220, 70, 20);
 
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel1.add(jTextField2);
         jTextField2.setBounds(410, 250, 310, 40);
 
+        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +123,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(410, 140, 70, 20);
 
+        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,8 +137,9 @@ public class SignUpPage extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(410, 450, 120, 30);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBackground(new java.awt.Color(153, 0, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Login Page");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,10 +230,11 @@ public class SignUpPage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignUpPage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            SignUpPage signUpFrame = new SignUpPage();
+            signUpFrame.pack();
+            signUpFrame.setLocationRelativeTo(null); // Center the frame
+            signUpFrame.setVisible(true);           // Make the frame visible
         });
     }
 
