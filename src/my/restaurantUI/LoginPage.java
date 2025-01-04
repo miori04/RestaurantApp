@@ -2,7 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+
 package my.restaurantUI;
+
+import java.io.*;
+import java.util.*;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -38,8 +44,14 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -164,7 +176,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
@@ -172,26 +184,78 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Indah");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Cafeteria");
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(343, 3));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 343, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/INDAH (1).png"))); // NOI18N
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Crews.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel12)))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 287, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 380, 500);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setText("Login Page");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(410, 80, 130, 50);
+        jLabel1.setBounds(410, 80, 280, 70);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -207,7 +271,9 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(410, 160, 70, 20);
 
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(0, 51, 102));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -216,7 +282,9 @@ public class LoginPage extends javax.swing.JFrame {
         jPanel1.add(jTextField2);
         jTextField2.setBounds(410, 190, 310, 40);
 
+        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPasswordField1.setForeground(new java.awt.Color(0, 51, 102));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -235,14 +303,16 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(409, 317, 100, 40);
+        jButton1.setBounds(410, 330, 100, 40);
 
-        jLabel4.setText("I don;t have an account");
+        jLabel4.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel4.setText("I don't have an account");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(410, 386, 160, 20);
+        jLabel4.setBounds(410, 390, 160, 20);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 51, 102));
         jButton2.setText("Sign Up");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +320,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(550, 380, 110, 30);
+        jButton2.setBounds(550, 390, 110, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,24 +350,66 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
         // Fetch the input values from the email and password fields
         String email = jTextField2.getText(); // Get text from the email field
         String password = new String(jPasswordField1.getPassword()); // Get text from the password field
-    
-        // Check if the email and password match the expected values
-        if (email.equals("mior") && password.equals("123"))
-        {
-            // If the credentials match, navigate to the signup page
-            SignUpPage signUpPage = new SignUpPage();
-            signUpPage.setLocationRelativeTo(null); // Center the new frame
-            signUpPage.setVisible(true);           // Make the frame visible
-            this.dispose();                        // Close the current login frame
+        
+        final String FILE_PATH = "src/DataFiles/LoginData.txt";
+        boolean isAuthenticated = false; // Flag to track login success
+
+        
+        try
+        {    
+        FileReader fr = new FileReader(FILE_PATH);
+        Scanner read = new Scanner(fr);
+        
+            while(read.hasNextLine())
+            {
+                String line = read.nextLine();
+                StringTokenizer st = new StringTokenizer(line, ";");
+                String storedEmail = st.nextToken();
+                String storedPassword = st.nextToken();
+            
+                // Check if the email and password match the expected values
+                if (email.equals(storedEmail) && password.equals(storedPassword))
+                {
+                    isAuthenticated = true;
+                    break;                       // Close the current login frame
+                }
+            }
+            read.close();
+            fr.close();
+
+            if (isAuthenticated) {
+                // Navigate to the HomePage if credentials are valid
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.setLocationRelativeTo(null); // Center the new frame
+                mainMenu.setVisible(true);           // Make the frame visible
+                this.dispose();                      // Close the current login frame
+            }
+
+            else 
+            {
+                // If credentials don't match, show an error message
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid email or password!", "Login Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
-        else 
+        
+        catch (FileNotFoundException e)
         {
-            // If credentials don't match, show an error message
-            javax.swing.JOptionPane.showMessageDialog(this, "Invalid email or password!", "Login Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        System.out.println("Error: File not found at " + FILE_PATH);
+        javax.swing.JOptionPane.showMessageDialog(this, "Login data file not found!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } 
+        catch (IOException e)
+        {
+        System.out.println("Error reading file: " + e.getMessage());
+        javax.swing.JOptionPane.showMessageDialog(this, "Error reading login data file!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e)
+        {
+        System.out.println("Unexpected error: " + e.getMessage());
+        javax.swing.JOptionPane.showMessageDialog(this, "An unexpected error occurred!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -381,6 +493,35 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginFrame.setVisible(true);           // Make the frame visible
             }
         });
+        try
+        {    
+        FileReader fr = new FileReader("LoginData.txt");
+        Scanner read = new Scanner(fr);
+        
+        while(read.hasNextLine())
+        {
+            String line = read.nextLine();
+            StringTokenizer st = new StringTokenizer(line, ";");
+            String email = st.nextToken();
+            String password = st.nextToken();
+            
+            
+        }
+            
+        fr.close();
+        
+        }
+        
+        catch(IOException ex)
+        {
+            System.out.println("error: " + ex.toString());
+        }
+        
+        catch(Exception ex)
+        {
+            System.out.println("error: " + ex.toString());
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -390,6 +531,9 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -397,12 +541,15 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
