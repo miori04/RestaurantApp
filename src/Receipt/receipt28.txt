@@ -1,0 +1,19 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+
+TABLE NUMBER: 2
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Burger                   1         4.00         4.00
+Chicken Chop             1         8.00         8.00
+Fried Rice               1         5.00         5.00
+Fish and Chips           2        15.80        31.60
+Chicken Rice             1         6.50         6.50
+----------------------------------------------------
+Payment Method :               Online Banking Subtotal (before tax):               RM        36.94
+Tax (6%):                            RM         2.36
+Total (with tax):                    RM        39.30
+****************************************************
+**************THANK YOU FOR COMING******************

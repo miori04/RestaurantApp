@@ -1,0 +1,19 @@
+********** RECEIPT **********
+Table Number: 1
+Item            Qty   Price/Unit Total     
+-----------------------------------------
+Burger          2     8.00       16.00     
+Fried Fries     1     2.50       2.50      
+Chicken Rice    1     6.50       6.50      
+Chicken Chop    2     16.00      32.00     
+Fried Rice      1     5.00       5.00      
+Fish and Chips  2     15.80      31.60     
+Milo Ice        1     3.00       3.00      
+Tea O Ice       1     2.00       2.00      
+Syrup Ice       2     3.00       6.00      
+Fresh Orange    1     2.50       2.50      
+Chocolate       2     15.80      31.60     
+Green Tea       1     6.90       6.90      
+-----------------------------------------
+Total (with tax): RM RM 87.00
+***************************************

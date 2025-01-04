@@ -1,0 +1,11 @@
+********** RECEIPT **********
+Table Number: 1
+Item            Qty   Price/Unit Total     
+-----------------------------------------
+Burger          2     8.00       16.00     
+Chicken Chop    1     8.00       8.00      
+Fish and Chips  1     7.90       7.90      
+Milo Ice        2     6.00       12.00     
+Syrup Ice       1     1.50       1.50      
+Chocolate       1     7.90       7.90      
+-----------------------------------------

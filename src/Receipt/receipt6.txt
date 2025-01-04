@@ -1,0 +1,16 @@
+********** RECEIPT **********
+Table Number: 1
+Item            Qty   Price/Unit Total     
+-----------------------------------------
+Burger          2     8.00       16.00     
+Fried Fries     1     2.50       2.50      
+Chicken Rice    1     6.50       6.50      
+Fish and Chips  1     7.90       7.90      
+Chicken Chop    1     8.00       8.00      
+Milo Ice        1     3.00       3.00      
+Chocolate       1     7.90       7.90      
+Green Tea       1     6.90       6.90      
+Fresh Orange    1     2.50       2.50      
+Tea O Ice       1     2.00       2.00      
+Syrup Ice       1     1.50       1.50      
+-----------------------------------------

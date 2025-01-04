@@ -11,6 +11,15 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.text.DecimalFormat;
+import java.io.*;
+
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 
 /**
@@ -95,9 +104,6 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
         jScrollBar1 = new javax.swing.JScrollBar();
         jButton25 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
@@ -105,6 +111,7 @@ public class MainMenu extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -417,33 +424,6 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Table Number");
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Cash *Pay at Counter");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Online Banking");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setText("E-wallet (TnG, Boost, ShopeePay, etc)");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-
         jButton25.setBackground(new java.awt.Color(255, 255, 255));
         jButton25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton25.setForeground(new java.awt.Color(0, 51, 102));
@@ -486,6 +466,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(0, 51, 102));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Online Banking", "E-Wallet " }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -500,23 +490,22 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel10Layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(22, 22, 22)
-                                            .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(22, 22, 22)
+                                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel19))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -560,20 +549,18 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addComponent(jTextField4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(361, 361, 361))
+                .addGap(469, 469, 469))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1325,18 +1312,6 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
-
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
         // TODO add your handling code here:
         jPanel11.setVisible(false);
@@ -1495,6 +1470,16 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
+        // Assume jTextFieldTotal contains the total amount
+        String total = jTextField1.getText(); // Replace with the actual variable name for your total field
+        String tax = jTextField2.getText();
+        String subtotal = jTextField3.getText();
+        
+        
+        
+        // Call the method to print receipt
+        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total);
+        
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
@@ -1566,6 +1551,10 @@ public class MainMenu extends javax.swing.JFrame {
         deleteRow("Chocolate");
     }//GEN-LAST:event_jButton38ActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -1635,7 +1624,7 @@ public class MainMenu extends javax.swing.JFrame {
 }
     
     // Method to calculate the total of a column in a JTable
-    public double calculateColumnTotal(JTable table, int columnIndex) {
+    double calculateColumnTotal(JTable table, int columnIndex) {
         double total = 0.0;
 
         for (int row = 0; row < table.getRowCount(); row++) {
@@ -1655,6 +1644,90 @@ public class MainMenu extends javax.swing.JFrame {
 
         return total;
     }
+    
+    public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, String subtotal, String tax, String total) {
+    try {
+        // Directory path for receipts
+        String directoryPath = "src/Receipt/";
+        File directory = new File(directoryPath);
+
+        // Create directory if it doesn't exist
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Generate incremented receipt filename
+        int receiptNumber = 1;
+        File file;
+        do {
+            file = new File(directoryPath + "receipt" + receiptNumber + ".txt");
+            receiptNumber++;
+        } while (file.exists());
+
+        // Get the selected table number
+        String tableNumber = tableNumberComboBox.getSelectedItem() != null ? tableNumberComboBox.getSelectedItem().toString() : "Unknown";
+        String payMethod = payMethodComboBox.getSelectedItem() != null ? payMethodComboBox.getSelectedItem().toString() : "Unknown";
+        
+        // Sanitize subtotal, tax, and total to remove "RM" prefix
+        double subtotalValue = Double.parseDouble(subtotal.replace("RM", "").trim());
+        double taxValue = Double.parseDouble(tax.replace("RM", "").trim());
+        double totalValue = Double.parseDouble(total.replace("RM", "").trim());
+
+        // Create and write to the receipt file
+        try (FileWriter writer = new FileWriter(file)) {
+            // Write receipt header
+            writer.write("************* INDAH CAFETERIA SDN. BHD. ************\n");
+            writer.write("********************* RECEIPT **********************\n\n");
+            writer.write("TABLE NUMBER: " + tableNumber + "\n\n");
+            writer.write("----------------------------------------------------\n");
+            writer.write(String.format("%-20s %5s %12s %12s\n", "Item", "Qty", "Price/Unit", "Total"));
+            writer.write("----------------------------------------------------\n");
+
+            // Write table data
+            TableModel model = table.getModel();
+            for (int row = 0; row < model.getRowCount(); row++) {
+                String item = model.getValueAt(row, 0).toString(); // Item name
+                int quantity = Integer.parseInt(model.getValueAt(row, 1).toString()); // Quantity
+                double pricePerUnit = Double.parseDouble(model.getValueAt(row, 2).toString()) / quantity; // Calculate price per unit
+                double itemTotal = Double.parseDouble(model.getValueAt(row, 2).toString()); // Total price for this item
+
+                // Write formatted row
+                writer.write(String.format("%-20s %5d %12.2f %12.2f\n", item, quantity, pricePerUnit, itemTotal));
+            }
+
+            // Write receipt footer
+            writer.write("----------------------------------------------------\n");
+            writer.write(String.format("%-30s %8s %12.2f\n", "Subtotal (before tax):", "RM", subtotalValue));
+            writer.write(String.format("%-30s %8s %12.2f\n", "Tax (6%):", "RM", taxValue));
+            writer.write(String.format("%-30s %8s %12.2f\n\n", "Total (with tax):", "RM", totalValue));
+            writer.write(String.format("%-30s %s\n\n", "Payment Method:", payMethod)); // Payment method does not require monetary alignment
+            writer.write("****************************************************\n");
+            writer.write("************** THANK YOU FOR COMING ****************\n");
+
+
+
+        }
+
+        // Show success dialog
+        JOptionPane.showMessageDialog(
+            null,
+            "You have successfully ordered. Please check your receipt in: " + file.getAbsolutePath(),
+            "Order Successful",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+    } catch (IOException ex) {
+        // Show error message for IO exceptions
+        JOptionPane.showMessageDialog(null, "Error saving receipt: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+        // Catch and log any other exceptions
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+
+
 
     
 
@@ -1741,10 +1814,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
