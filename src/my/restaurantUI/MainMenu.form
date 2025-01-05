@@ -1053,10 +1053,10 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel51" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jButton31" alignment="3" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jButton32" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jButton30" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jButton31" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1593,7 +1593,6 @@
                                       </Group>
                                       <Component id="jLabel57" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
