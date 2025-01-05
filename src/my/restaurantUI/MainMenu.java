@@ -20,6 +20,13 @@ import javax.swing.JFileChooser;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 
 
 /**
@@ -44,6 +51,28 @@ public class MainMenu extends javax.swing.JFrame {
             jTextField1.setText(String.format("RM %.2f", total));
             jTextField2.setText(String.format("RM %.2f", tax));
             jTextField3.setText(String.format("RM %.2f", subTotal));
+            
+             // Get the voucher code
+            String voucherCode = jTextField4.getText().trim();
+            
+            // Determine the discount percentage based on the voucher code
+            double discountPercentage = 0.0;
+            if ("DISCOUNT10".equalsIgnoreCase(voucherCode)) {
+                discountPercentage = 0.10; // 10% discount
+            } else if ("DISCOUNT20".equalsIgnoreCase(voucherCode)) {
+                discountPercentage = 0.20; // 20% discount
+            } else if ("DISCOUNT30".equalsIgnoreCase(voucherCode)) {
+                discountPercentage = 0.30; // 30% discount
+            }
+
+            // Update the total with voucher applied only if a valid voucher code is present
+            if (discountPercentage > 0) {
+                double totalWithVoucher = total * (1 - discountPercentage);
+                jTextField5.setText(String.format("RM %.2f", totalWithVoucher));
+            } else {
+                // If no valid voucher code, leave jTextField5 unchanged
+                jTextField5.setText("");
+            }
         }
     });
     
@@ -81,8 +110,6 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -112,6 +139,9 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton39 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -258,37 +288,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 299, 234, -1));
 
-        jPanel8.setBackground(new java.awt.Color(0, 51, 102));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel8MousePressed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Order");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 377, 234, -1));
-
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Chefs.png"))); // NOI18N
         jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 240, 300));
@@ -380,7 +379,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Total        : ");
+        jLabel16.setText("Total with voucher applied :");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -476,6 +475,30 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel47.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText("Total        : ");
+
+        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(0, 51, 102));
+        jTextField5.setText("RM 0.00");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jButton39.setBackground(new java.awt.Color(255, 255, 255));
+        jButton39.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton39.setForeground(new java.awt.Color(0, 51, 102));
+        jButton39.setText("Reset");
+        jButton39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton39ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -490,29 +513,35 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel10Layout.createSequentialGroup()
-                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel19))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jButton39)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel19))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField5)))))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,9 +566,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47))
                 .addGap(7, 7, 7)
                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -548,19 +577,25 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)))
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(469, 469, 469))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jButton39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(416, 416, 416))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1294,13 +1329,6 @@ public class MainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel7MousePressed
 
-    private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
-        // TODO add your handling code here:
-        jPanel11.setVisible(false);
-        jTabbedPane1.setSelectedIndex(2);
-
-    }//GEN-LAST:event_jPanel8MousePressed
-
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
         // TODO add your handling code here:
         
@@ -1470,20 +1498,21 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
-        // Assume jTextFieldTotal contains the total amount
-        String total = jTextField1.getText(); // Replace with the actual variable name for your total field
-        String tax = jTextField2.getText();
+        // Retrieve values from fields
         String subtotal = jTextField3.getText();
-        
-        
-        
+        String tax = jTextField2.getText();
+        String total = jTextField1.getText();
+        String totalWithVoucher = jTextField5.getText();
+        String voucherCode = jTextField4.getText();
+
         // Call the method to print receipt
-        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total);
-        
+        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode);
+
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
+        applyVoucher();
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1554,6 +1583,41 @@ public class MainMenu extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+        // TODO add your handling code here:
+        
+        // Confirm reset action
+    int confirm = JOptionPane.showConfirmDialog(
+        null,
+        "Are you sure you want to clear all orders?",
+        "Reset Order",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    // If user confirms, clear the table
+    if (confirm == JOptionPane.YES_OPTION) {
+        // Get the table model
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        // Remove all rows
+        model.setRowCount(0);
+
+        // Reset other fields, if needed
+        jTextField1.setText(null); // Total
+        jTextField2.setText(null); // Tax
+        jTextField3.setText(null); // Subtotal
+        jTextField4.setText(null); // Voucher code
+        jTextField5.setText(null); // Total with voucher applied
+
+        // Show success message
+        JOptionPane.showMessageDialog(null, "All orders have been cleared!", "Reset Successful", JOptionPane.INFORMATION_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton39ActionPerformed
 
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
@@ -1645,7 +1709,7 @@ public class MainMenu extends javax.swing.JFrame {
         return total;
     }
     
-    public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, String subtotal, String tax, String total) {
+    public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, String subtotal, String tax,String total, String totalWithVoucher, String voucherCode) {
     try {
         // Directory path for receipts
         String directoryPath = "src/Receipt/";
@@ -1668,16 +1732,32 @@ public class MainMenu extends javax.swing.JFrame {
         String tableNumber = tableNumberComboBox.getSelectedItem() != null ? tableNumberComboBox.getSelectedItem().toString() : "Unknown";
         String payMethod = payMethodComboBox.getSelectedItem() != null ? payMethodComboBox.getSelectedItem().toString() : "Unknown";
         
-        // Sanitize subtotal, tax, and total to remove "RM" prefix
+        // Determine the total value based on the voucher code
+        double totalValue;
+        if ("DISCOUNT10".equalsIgnoreCase(voucherCode) || 
+            "DISCOUNT20".equalsIgnoreCase(voucherCode) || 
+            "DISCOUNT30".equalsIgnoreCase(voucherCode)) {
+            totalValue = Double.parseDouble(totalWithVoucher.replace("RM", "").trim());
+        } else {
+            totalValue = Double.parseDouble(total.replace("RM", "").trim());
+            voucherCode = ""; // Clear voucher code if it is "add a voucher code" or null
+        }
+
+        // Sanitize subtotal and tax to remove "RM" prefix
         double subtotalValue = Double.parseDouble(subtotal.replace("RM", "").trim());
         double taxValue = Double.parseDouble(tax.replace("RM", "").trim());
-        double totalValue = Double.parseDouble(total.replace("RM", "").trim());
+
+        // Get current date and time
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
 
         // Create and write to the receipt file
         try (FileWriter writer = new FileWriter(file)) {
             // Write receipt header
             writer.write("************* INDAH CAFETERIA SDN. BHD. ************\n");
-            writer.write("********************* RECEIPT **********************\n\n");
+            writer.write("********************* RECEIPT **********************\n");
+            writer.write("DATE/TIME: " + formattedDateTime + "\n"); // Add the real-time date and time
             writer.write("TABLE NUMBER: " + tableNumber + "\n\n");
             writer.write("----------------------------------------------------\n");
             writer.write(String.format("%-20s %5s %12s %12s\n", "Item", "Qty", "Price/Unit", "Total"));
@@ -1700,12 +1780,12 @@ public class MainMenu extends javax.swing.JFrame {
             writer.write(String.format("%-30s %8s %12.2f\n", "Subtotal (before tax):", "RM", subtotalValue));
             writer.write(String.format("%-30s %8s %12.2f\n", "Tax (6%):", "RM", taxValue));
             writer.write(String.format("%-30s %8s %12.2f\n\n", "Total (with tax):", "RM", totalValue));
-            writer.write(String.format("%-30s %s\n\n", "Payment Method:", payMethod)); // Payment method does not require monetary alignment
+            if (!voucherCode.isEmpty()) {
+                writer.write(String.format("%-30s %s\n", "Voucher Applied:", voucherCode));
+            }
+            writer.write(String.format("%-30s %s\n\n", "Payment Method:", payMethod));
             writer.write("****************************************************\n");
             writer.write("************** THANK YOU FOR COMING ****************\n");
-
-
-
         }
 
         // Show success dialog
@@ -1717,13 +1797,52 @@ public class MainMenu extends javax.swing.JFrame {
         );
 
     } catch (IOException ex) {
-        // Show error message for IO exceptions
         JOptionPane.showMessageDialog(null, "Error saving receipt: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception ex) {
-        // Catch and log any other exceptions
         JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+    
+    // Method to apply voucher code
+    private void applyVoucher() {
+    // Get the voucher code from jTextField4
+    String voucherCode = jTextField4.getText() != null ? jTextField4.getText().trim() : "";
+
+    // If the voucher code is null or empty, reset the total with voucher applied
+    if (voucherCode.isEmpty()) {
+        jTextField5.setText(null); // Reset to null
+        JOptionPane.showMessageDialog(null, "Voucher code has been cleared!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        return; // Exit the method
+    }
+
+    // Calculate the total and determine the discount percentage
+    double total = Double.parseDouble(jTextField1.getText().replace("RM", "").trim()); // Total value
+    double discountPercentage = 0.0;
+
+    // Check for valid voucher codes and assign discount percentage
+    if ("DISCOUNT10".equalsIgnoreCase(voucherCode)) {
+        discountPercentage = 0.10; // 10% discount
+    } else if ("DISCOUNT20".equalsIgnoreCase(voucherCode)) {
+        discountPercentage = 0.20; // 20% discount
+    } else if ("DISCOUNT30".equalsIgnoreCase(voucherCode)) {
+        discountPercentage = 0.30; // 30% discount
+    } else {
+        // If the voucher code is invalid, show an error message and reset
+        JOptionPane.showMessageDialog(null, "Invalid voucher code!", "Error", JOptionPane.ERROR_MESSAGE);
+        jTextField5.setText(null); // Reset to null
+        return;
+    }
+
+    // Apply the discount and update jTextField5
+    double totalWithVoucher = total * (1 - discountPercentage);
+    jTextField5.setText(String.format("RM %.2f", totalWithVoucher));
+
+    // Show a success dialog message
+    JOptionPane.showMessageDialog(null, "Voucher code has been applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
+}
+
+
 
 
 
@@ -1808,6 +1927,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1849,7 +1969,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -1857,6 +1976,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -1871,7 +1991,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -1880,6 +1999,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
 

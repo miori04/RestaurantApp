@@ -1,0 +1,23 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+DATE/TIME: 05-01-2025 10:36:07
+TABLE NUMBER: 7
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Burger                   2         4.00         8.00
+Fried Fries              1         2.50         2.50
+Fish and Chips           1         7.90         7.90
+Milo Ice                 2         3.00         6.00
+Syrup Ice                1         1.50         1.50
+Chocolate                1         7.90         7.90
+----------------------------------------------------
+Subtotal (before tax):               RM        31.77
+Tax (6%):                            RM         2.03
+Total (with tax):                    RM         0.00
+
+Payment Method:                Online Banking
+
+****************************************************
+************** THANK YOU FOR COMING ****************

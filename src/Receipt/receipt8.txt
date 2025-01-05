@@ -1,0 +1,24 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+DATE/TIME: 05-01-2025 10:37:38
+TABLE NUMBER: 1
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Burger                   2         4.00         8.00
+Fried Rice               2         5.00        10.00
+Chicken Rice             1         6.50         6.50
+Fresh Orange             1         2.50         2.50
+Chocolate                1         7.90         7.90
+Green Tea                2         6.90        13.80
+----------------------------------------------------
+Subtotal (before tax):               RM        45.78
+Tax (6%):                            RM         2.92
+Total (with tax):                    RM         0.00
+
+Voucher Applied:               Add a voucher code
+Payment Method:                Cash
+
+****************************************************
+************** THANK YOU FOR COMING ****************
