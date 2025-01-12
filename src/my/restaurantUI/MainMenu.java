@@ -26,6 +26,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 
@@ -1618,6 +1630,10 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
+        
+        // Path to the text file
+        String filePath = "src/itemSales/itemSales.txt";
+
         // Retrieve values from fields
         String subtotal = jTextField3.getText();
         String tax = jTextField2.getText();
@@ -1630,16 +1646,93 @@ public class MainMenu extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        // Remove all rows
+        // Create a map to store the data
+        Map<String, String[]> itemSalesMap = new HashMap<>();
+
+        // Load existing data from the file
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length == 3) {
+                    String productName = parts[0];
+                    int quantity = Integer.parseInt(parts[1]);
+                    double price = Double.parseDouble(parts[2]);
+                    itemSalesMap.put(productName, new String[]{String.valueOf(quantity), String.valueOf(price)});
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("File not found or cannot be read.");
+        }
+
+        // Update map with data from jTable1
+        for (int row = 0; row < model.getRowCount(); row++) {
+            String productName = model.getValueAt(row, 0).toString();
+            int quantity = Integer.parseInt(model.getValueAt(row, 1).toString());
+            double price = Double.parseDouble(model.getValueAt(row, 2).toString());
+
+            if (itemSalesMap.containsKey(productName)) {
+                // Update existing entry
+                String[] existingData = itemSalesMap.get(productName);
+                int updatedQuantity = Integer.parseInt(existingData[0]) + quantity;
+                double updatedPrice = Double.parseDouble(existingData[1]) + price;
+                itemSalesMap.put(productName, new String[]{String.valueOf(updatedQuantity), String.valueOf(updatedPrice)});
+            } else {
+                // Add new entry
+                itemSalesMap.put(productName, new String[]{String.valueOf(quantity), String.valueOf(price)});
+            }
+        }
+
+        // Define custom sorting order
+        List<String> customOrder = Arrays.asList(
+            "Burger", "Fried Fries", "Chicken Rice", "Chicken Chop", "Fried Rice", "Fish and Chips",
+            "Milo Ice", "Syrup Ice", "Green Tea", "Tea O Ice", "Fresh Orange", "Chocolate"
+        );
+
+        // Sort entries based on the custom order
+        List<Map.Entry<String, String[]>> sortedEntries = new ArrayList<>(itemSalesMap.entrySet());
+        sortedEntries.sort((entry1, entry2) -> {
+            String product1 = entry1.getKey();
+            String product2 = entry2.getKey();
+
+            int index1 = customOrder.indexOf(product1);
+            int index2 = customOrder.indexOf(product2);
+
+            // Items not in the custom order will appear last
+            if (index1 == -1) return 1;
+            if (index2 == -1) return -1;
+
+            // Sort by custom order
+            return Integer.compare(index1, index2);
+        });
+
+        // Write sorted data back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
+            for (Map.Entry<String, String[]> entry : sortedEntries) {
+                String productName = entry.getKey();
+                String quantity = entry.getValue()[0];
+                double price = Double.parseDouble(entry.getValue()[1]);
+                String formattedPrice = String.format("%.2f", price);
+
+                writer.write(productName + ";" + quantity + ";" + formattedPrice);
+                writer.newLine();
+            }
+            System.out.println("File updated with sorted entries.");
+        } catch (IOException e) {
+            System.out.println("Error writing to file.");
+        }
+
+        // Remove all rows from the table
         model.setRowCount(0);
 
-        // Reset other fields, if needed
+        // Reset other fields
         jTextField1.setText(null); // Total
         jTextField2.setText(null); // Tax
         jTextField3.setText(null); // Subtotal
         jTextField4.setText(null); // Voucher code
-        jTextField5.setText(null); // Total with voucher applied
-        
+        jTextField5.setText(null); // Total with voucher applied
+
+
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
