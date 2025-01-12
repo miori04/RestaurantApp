@@ -1628,6 +1628,18 @@ public class MainMenu extends javax.swing.JFrame {
         // Call the method to print receipt
         printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode);
 
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        // Remove all rows
+        model.setRowCount(0);
+
+        // Reset other fields, if needed
+        jTextField1.setText(null); // Total
+        jTextField2.setText(null); // Tax
+        jTextField3.setText(null); // Subtotal
+        jTextField4.setText(null); // Voucher code
+        jTextField5.setText(null); // Total with voucher applied
+        
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
