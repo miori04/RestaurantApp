@@ -123,6 +123,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -248,7 +249,7 @@ public class MainMenu extends javax.swing.JFrame {
                 jLabel12MousePressed(evt);
             }
         });
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, -1, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 190));
 
         jPanel6.setBackground(new java.awt.Color(0, 51, 102));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -269,7 +270,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +280,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 221, -1, -1));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, -1));
 
         jPanel7.setBackground(new java.awt.Color(0, 51, 102));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -310,11 +311,20 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 299, 234, -1));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, -1));
 
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Chefs.png"))); // NOI18N
         jPanel2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 240, 300));
+
+        jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/INDAH__12_-removebg-preview (1).png"))); // NOI18N
+        jLabel59.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel59MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 1080));
 
@@ -1732,9 +1742,27 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField4.setText(null); // Voucher code
         jTextField5.setText(null); // Total with voucher applied
 
+        
+
 
     }//GEN-LAST:event_jButton25ActionPerformed
 
+    private void openReceipt(String filePath) {
+        
+        try {
+            File file = new File(filePath);
+            if (file.exists()) {
+                Desktop.getDesktop().open(file);
+            } else {
+                JOptionPane.showMessageDialog(null, "Receipt file not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Unable to open the receipt file.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    }
+    
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
         applyVoucher();
@@ -1844,6 +1872,23 @@ public class MainMenu extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButton39ActionPerformed
 
+    private void jLabel59MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel59MouseClicked
+        // TODO add your handling code here:
+        
+        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout Confirmation", JOptionPane.YES_NO_OPTION);
+    if (choice == JOptionPane.YES_OPTION) {
+        // Create and display the login frame
+        LoginPage LoginFrame = new LoginPage();
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        LoginFrame.setVisible(true);
+
+        // Close the current frame
+        this.dispose();
+    }
+        
+    }//GEN-LAST:event_jLabel59MouseClicked
+
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -1935,7 +1980,20 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, String subtotal, String tax,String total, String totalWithVoucher, String voucherCode) {
-    try {
+    
+        try {
+            // Check if there is any data in the table
+            if (table.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "There is no order. Please create an order first.",
+                    "No Orders",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return; // Stop execution of the method
+            }
+            
+            
         // Directory path for receipts
         String directoryPath = "src/Receipt/";
         File directory = new File(directoryPath);
@@ -1956,7 +2014,7 @@ public class MainMenu extends javax.swing.JFrame {
         // Get the selected table number
         String tableNumber = tableNumberComboBox.getSelectedItem() != null ? tableNumberComboBox.getSelectedItem().toString() : "Unknown";
         String payMethod = payMethodComboBox.getSelectedItem() != null ? payMethodComboBox.getSelectedItem().toString() : "Unknown";
-        
+
         // Determine the total value based on the voucher code
         double totalValue;
         if ("DISCOUNT10".equalsIgnoreCase(voucherCode) || 
@@ -2013,19 +2071,32 @@ public class MainMenu extends javax.swing.JFrame {
             writer.write("************** THANK YOU FOR COMING ****************\n");
         }
 
-        // Show success dialog
-        JOptionPane.showMessageDialog(
+        // Show success dialog with "Open Receipt" option
+        int option = JOptionPane.showOptionDialog(
             null,
-            "You have successfully ordered. Please check your receipt in: " + file.getAbsolutePath(),
+            "You have successfully ordered. Do you want to open the receipt?",
             "Order Successful",
-            JOptionPane.INFORMATION_MESSAGE
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new String[]{"Open Receipt", "Close"},
+            "Open Receipt"
         );
+
+        if (option == 0) { // "Open Receipt" button clicked
+            MainMenu instance = new MainMenu();
+            instance.openReceipt(file.getAbsolutePath());
+        }
+
+
 
     } catch (IOException ex) {
         JOptionPane.showMessageDialog(null, "Error saving receipt: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+        
+        
 }
 
     
@@ -2214,6 +2285,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

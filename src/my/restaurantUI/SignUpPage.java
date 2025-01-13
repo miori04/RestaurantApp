@@ -331,7 +331,7 @@ public class SignUpPage extends javax.swing.JFrame {
 
         // Handle duplicate case
         if (isDuplicate) {
-            JOptionPane.showMessageDialog(this, "Sorry, Your data is already existed in our system. Try to use another.", "Duplicate Found", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Sorry, Your data is already existed in our system. Try to use another .", "Duplicate Found", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
