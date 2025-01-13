@@ -4,6 +4,14 @@
  */
 package my.restaurantUI;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author mior
@@ -15,6 +23,27 @@ public class SignUpPage extends javax.swing.JFrame {
      */
     public SignUpPage() {
         initComponents();
+        
+        // Set the echo character for the password fields
+        jPasswordField1.setEchoChar('●');
+        jPasswordField2.setEchoChar('●');
+
+        // Add action listener to toggle password visibility
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jCheckBox1.isSelected()) {
+                    // Show plain text in both password fields
+                    jPasswordField1.setEchoChar((char) 0);
+                    jPasswordField2.setEchoChar((char) 0);
+                } else {
+                    // Mask the passwords in both fields
+                    jPasswordField1.setEchoChar('●');
+                    jPasswordField2.setEchoChar('●');
+                }
+            }
+        });
+
+        
     }
 
     /**
@@ -43,6 +72,9 @@ public class SignUpPage extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,21 +156,21 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setText("Sign Up Page");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(410, 80, 170, 50);
+        jLabel1.setBounds(410, 0, 170, 50);
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel2.setText("Password");
+        jLabel2.setText("Confirm Password");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(410, 300, 70, 25);
+        jLabel2.setBounds(410, 300, 130, 25);
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
         jLabel3.setText("Email");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(410, 220, 70, 20);
+        jLabel3.setBounds(410, 140, 70, 20);
 
         jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -149,7 +181,7 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField2);
-        jTextField2.setBounds(410, 250, 310, 40);
+        jTextField2.setBounds(410, 170, 310, 40);
 
         jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -160,7 +192,7 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jPasswordField1);
-        jPasswordField1.setBounds(410, 330, 310, 40);
+        jPasswordField1.setBounds(410, 250, 310, 40);
 
         jButton1.setBackground(new java.awt.Color(153, 0, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -172,14 +204,14 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(410, 390, 100, 40);
+        jButton1.setBounds(410, 410, 100, 40);
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
         jLabel5.setText("Full Name");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(410, 140, 70, 20);
+        jLabel5.setBounds(410, 60, 70, 20);
 
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -190,7 +222,7 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField3);
-        jTextField3.setBounds(410, 170, 310, 40);
+        jTextField3.setBounds(410, 90, 310, 40);
 
         jLabel4.setForeground(new java.awt.Color(0, 51, 102));
         jLabel4.setText("I have an account");
@@ -208,6 +240,35 @@ public class SignUpPage extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(530, 450, 110, 30);
+
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setForeground(new java.awt.Color(0, 51, 102));
+        jCheckBox1.setText("Show Password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCheckBox1);
+        jCheckBox1.setBounds(410, 380, 110, 20);
+
+        jPasswordField2.setBackground(new java.awt.Color(255, 255, 255));
+        jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPasswordField2.setForeground(new java.awt.Color(0, 51, 102));
+        jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jPasswordField2);
+        jPasswordField2.setBounds(410, 330, 310, 40);
+
+        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel7.setText("Password");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(410, 220, 70, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,6 +290,71 @@ public class SignUpPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        // Get user input
+        String fullName = jTextField3.getText().trim();
+        String email = jTextField2.getText().trim();
+        String password = new String(jPasswordField1.getPassword()).trim();
+        String confirmPassword = new String(jPasswordField2.getPassword()).trim(); // Get confirmation password
+        String newEntry = fullName + ";" + email + ";" + password;
+
+        // Validate input
+        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Check if password and confirm password are the same
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Unsuccessful! Your passwords do not match. Try again.", "Password Mismatch", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // File path
+        String filePath = "src/DataFiles/LoginData.txt";
+
+        // Check for duplicate entries in the text file
+        boolean isDuplicate = false;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(newEntry)) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading data from file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        }
+
+        // Handle duplicate case
+        if (isDuplicate) {
+            JOptionPane.showMessageDialog(this, "Sorry, Your data is already existed in our system. Try to use another.", "Duplicate Found", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Append the new entry if no duplicate is found
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(newEntry);
+            writer.newLine(); // Add a new line
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving data to file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        }
+
+        // Show success message
+        JOptionPane.showMessageDialog(this, "You have successfully signed up! You can now log in.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        // Clear the fields
+        jTextField3.setText("");
+        jTextField2.setText("");
+        jPasswordField1.setText("");
+        jPasswordField2.setText(""); // Clear the confirmation password field
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -261,6 +387,14 @@ public class SignUpPage extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +435,7 @@ public class SignUpPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -309,11 +444,13 @@ public class SignUpPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables

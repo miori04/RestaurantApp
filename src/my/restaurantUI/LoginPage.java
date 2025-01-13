@@ -21,6 +21,21 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        
+        // Set the echo character for jPasswordField1 to ●
+    jPasswordField1.setEchoChar('●');
+    
+    // Add an action listener to jCheckBox1 for toggling password visibility
+    jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            if (jCheckBox1.isSelected()) {
+                jPasswordField1.setEchoChar((char) 0); // Show plain text
+            } else {
+                jPasswordField1.setEchoChar('●'); // Mask the password
+            }
+        }
+    });
+        
     }
 
     /**
@@ -60,6 +75,7 @@ public class LoginPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,12 +319,12 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(410, 330, 100, 40);
+        jButton1.setBounds(410, 360, 100, 40);
 
         jLabel4.setForeground(new java.awt.Color(0, 51, 102));
         jLabel4.setText("I don't have an account");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(410, 390, 160, 20);
+        jLabel4.setBounds(410, 420, 160, 20);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -320,7 +336,18 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(550, 390, 110, 30);
+        jButton2.setBounds(550, 420, 110, 30);
+
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setForeground(new java.awt.Color(0, 51, 102));
+        jCheckBox1.setText("Show Password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCheckBox1);
+        jCheckBox1.setBounds(410, 320, 110, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -350,33 +377,35 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        // Fetch the input values from the email and password fields
-        String email = jTextField2.getText(); // Get text from the email field
-        String password = new String(jPasswordField1.getPassword()); // Get text from the password field
         
+        // Fetch the input values from the email and password fields
+        String email = jTextField2.getText().trim(); // Get text from the email field and trim whitespace
+        String password = new String(jPasswordField1.getPassword()).trim(); // Get text from the password field and trim whitespace
+
         final String FILE_PATH = "src/DataFiles/LoginData.txt";
         boolean isAuthenticated = false; // Flag to track login success
 
-        
-        try
-        {    
-        FileReader fr = new FileReader(FILE_PATH);
-        Scanner read = new Scanner(fr);
-        
-            while(read.hasNextLine())
-            {
+        try {
+            FileReader fr = new FileReader(FILE_PATH);
+            Scanner read = new Scanner(fr);
+
+            while (read.hasNextLine()) {
                 String line = read.nextLine();
                 StringTokenizer st = new StringTokenizer(line, ";");
-                String storedEmail = st.nextToken();
-                String storedPassword = st.nextToken();
-            
-                // Check if the email and password match the expected values
-                if (email.equals(storedEmail) && password.equals(storedPassword))
-                {
-                    isAuthenticated = true;
-                    break;                       // Close the current login frame
+
+                if (st.countTokens() == 3) { // Ensure the line has exactly 3 tokens (fullname;email;password)
+                    st.nextToken(); // Skip the fullname field
+                    String storedEmail = st.nextToken();
+                    String storedPassword = st.nextToken();
+
+                    // Check if the email and password match the expected values
+                    if (email.equals(storedEmail) && password.equals(storedPassword)) {
+                        isAuthenticated = true;
+                        break; // Exit the loop as soon as a match is found
+                    }
                 }
             }
+
             read.close();
             fr.close();
 
@@ -386,31 +415,22 @@ public class LoginPage extends javax.swing.JFrame {
                 mainMenu.setLocationRelativeTo(null); // Center the new frame
                 mainMenu.setVisible(true);           // Make the frame visible
                 this.dispose();                      // Close the current login frame
-            }
-
-            else 
-            {
+            } else {
                 // If credentials don't match, show an error message
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid email or password!", "Login Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found at " + FILE_PATH);
+            javax.swing.JOptionPane.showMessageDialog(this, "Login data file not found!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Error reading login data file!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "An unexpected error occurred!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-        
-        catch (FileNotFoundException e)
-        {
-        System.out.println("Error: File not found at " + FILE_PATH);
-        javax.swing.JOptionPane.showMessageDialog(this, "Login data file not found!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } 
-        catch (IOException e)
-        {
-        System.out.println("Error reading file: " + e.getMessage());
-        javax.swing.JOptionPane.showMessageDialog(this, "Error reading login data file!", "File Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-        catch (Exception e)
-        {
-        System.out.println("Unexpected error: " + e.getMessage());
-        javax.swing.JOptionPane.showMessageDialog(this, "An unexpected error occurred!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -451,6 +471,10 @@ public class LoginPage extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -529,6 +553,7 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
