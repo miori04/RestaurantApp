@@ -1,12 +1,12 @@
-Burger;11;44.00
-Fried Fries;6;15.00
-Chicken Rice;2;13.00
-Chicken Chop;3;24.00
-Fried Rice;1;5.00
-Fish and Chips;1;7.90
-Milo Ice;4;12.00
-Syrup Ice;6;9.00
-Green Tea;4;27.60
-Tea O Ice;4;8.00
-Fresh Orange;3;7.50
-Chocolate;1;7.90
+Burger;54;216.0
+Fried Rice;3;15.0
+Tea O Ice;12;24.0
+Fish and Chips;3;23.700000000000003
+Syrup Ice;11;16.5
+Fresh Orange;8;20.0
+Fried Fries;24;60.0
+Chicken Chop;3;24.0
+Chocolate;7;55.3
+Milo Ice;4;12.0
+Chicken Rice;4;26.0
+Green Tea;7;48.3

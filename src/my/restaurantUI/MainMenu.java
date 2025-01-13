@@ -39,6 +39,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.Vector;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+
 
 
 /**
@@ -50,6 +57,8 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    private String username; // Variable to store the username
+    
     public MainMenu() {
         initComponents(); 
         
@@ -124,6 +133,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel60 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -132,6 +143,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -233,6 +245,9 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel58 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -311,7 +326,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, -1));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 240, -1));
 
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Chefs.png"))); // NOI18N
@@ -326,6 +341,34 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 60));
 
+        jPanel8.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel8MousePressed(evt);
+            }
+        });
+
+        jLabel60.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel60.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel60.setText("Orders");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel60, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 240, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 1080));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -335,7 +378,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(0, 51, 102));
         jLabel22.setText("Welcome !");
-        jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 86, 547, 110));
+        jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 86, 300, 110));
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/INDAH (6).png"))); // NOI18N
@@ -381,6 +424,10 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("Order");
         jPanel11.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 441, 160, -1));
+
+        jLabel61.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(0, 51, 102));
+        jPanel11.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 370, 100));
 
         jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -1429,15 +1476,44 @@ public class MainMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Drink Menu", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel58.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel58.setText("Order History");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Order Date", "Order ID", "Total", "Voucher Applied"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1150, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1045, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(495, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Order Menu", jPanel5);
@@ -1458,16 +1534,22 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setUsername(String username) {
+        jLabel61.setText(username); // Set the username on jLabel61
+    }
+    
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
         // TODO add your handling code here:
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(0);
+        jLayeredPane1.setVisible(true);
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void jPanel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MousePressed
         // TODO add your handling code here:
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(1);
+        jLayeredPane1.setVisible(true);
 
     }//GEN-LAST:event_jPanel7MousePressed
 
@@ -1641,8 +1723,12 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
         
-        // Path to the text file
+        // Path to the text file for item sales
         String filePath = "src/itemSales/itemSales.txt";
+        String orderIdFilePath = "src/Orders/orderId.txt"; // File to store the last Order ID
+
+        // Generate a new Order ID
+        String orderId = generateOrderId();
 
         // Retrieve values from fields
         String subtotal = jTextField3.getText();
@@ -1651,12 +1737,24 @@ public class MainMenu extends javax.swing.JFrame {
         String totalWithVoucher = jTextField5.getText();
         String voucherCode = jTextField4.getText();
 
-        // Call the method to print receipt
-        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode);
+        // Check if a voucher code is applied and update total accordingly
+        if (voucherCode == null || voucherCode.isEmpty()) {
+            voucherCode = "none"; // If no voucher code, set to "none"
+        }
 
+        // Get the current date and time using the getCurrentTime method
+        String currentTime = getCurrentTime();
+
+        // Save order details with the additional time parameter
+        saveOrderDetails(orderId, total, totalWithVoucher, voucherCode, currentTime);
+
+        // Call the method to print receipt and pass the Order ID
+        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode, orderId);
+
+        // DefaultTableModel model to manipulate the JTable
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        // Create a map to store the data
+        // Create a map to store the data for item sales
         Map<String, String[]> itemSalesMap = new HashMap<>();
 
         // Load existing data from the file
@@ -1693,41 +1791,15 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
 
-        // Define custom sorting order
-        List<String> customOrder = Arrays.asList(
-            "Burger", "Fried Fries", "Chicken Rice", "Chicken Chop", "Fried Rice", "Fish and Chips",
-            "Milo Ice", "Syrup Ice", "Green Tea", "Tea O Ice", "Fresh Orange", "Chocolate"
-        );
-
-        // Sort entries based on the custom order
-        List<Map.Entry<String, String[]>> sortedEntries = new ArrayList<>(itemSalesMap.entrySet());
-        sortedEntries.sort((entry1, entry2) -> {
-            String product1 = entry1.getKey();
-            String product2 = entry2.getKey();
-
-            int index1 = customOrder.indexOf(product1);
-            int index2 = customOrder.indexOf(product2);
-
-            // Items not in the custom order will appear last
-            if (index1 == -1) return 1;
-            if (index2 == -1) return -1;
-
-            // Sort by custom order
-            return Integer.compare(index1, index2);
-        });
-
         // Write sorted data back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
-            for (Map.Entry<String, String[]> entry : sortedEntries) {
+            for (Map.Entry<String, String[]> entry : itemSalesMap.entrySet()) {
                 String productName = entry.getKey();
                 String quantity = entry.getValue()[0];
-                double price = Double.parseDouble(entry.getValue()[1]);
-                String formattedPrice = String.format("%.2f", price);
-
-                writer.write(productName + ";" + quantity + ";" + formattedPrice);
+                String price = entry.getValue()[1];
+                writer.write(productName + ";" + quantity + ";" + price);
                 writer.newLine();
             }
-            System.out.println("File updated with sorted entries.");
         } catch (IOException e) {
             System.out.println("Error writing to file.");
         }
@@ -1742,11 +1814,117 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField4.setText(null); // Voucher code
         jTextField5.setText(null); // Total with voucher applied
 
-        
-
-
     }//GEN-LAST:event_jButton25ActionPerformed
 
+      private void saveOrderDetails(String orderId, String total, String totalWithVoucher, String voucherCode, String currentTime) {
+    // Retrieve the current user from jLabel61 (assumed to be the username)
+    String currentUser = jLabel61.getText();
+
+    // Define the path for the "Orders" folder
+    String ordersFolderPath = "Orders/";
+
+    // Define the folder path for the current user inside the "Orders" folder
+    String userFolderPath = ordersFolderPath + currentUser;  // Folder path for the current user
+    File userFolder = new File(userFolderPath);
+
+    // Check if the "Orders" folder exists, if not, create it
+    File ordersFolder = new File(ordersFolderPath);
+    if (!ordersFolder.exists()) {
+        boolean ordersFolderCreated = ordersFolder.mkdirs(); // Create the "Orders" folder if it doesn't exist
+        if (ordersFolderCreated) {
+            System.out.println("Orders folder created: " + ordersFolderPath);
+        } else {
+            System.out.println("Failed to create Orders folder: " + ordersFolderPath);
+        }
+    }
+
+    // Check if the folder for the current user exists, if not, create it
+    if (!userFolder.exists()) {
+        boolean userFolderCreated = userFolder.mkdirs(); // Create the folder for the current user if it doesn't exist
+        if (userFolderCreated) {
+            System.out.println("User folder created: " + userFolderPath);
+        } else {
+            System.out.println("Failed to create user folder: " + userFolderPath);
+        }
+    }
+
+    // Define the path for the order details text file inside the user's folder
+    String orderFilePath = userFolderPath + File.separator + orderId + ".txt";  // Order details file path
+    File orderFile = new File(orderFilePath);
+
+    // Check if the file exists, if not, create it
+    if (!orderFile.exists()) {
+        try {
+            boolean fileCreated = orderFile.createNewFile(); // Create the file for the order if it doesn't exist
+            if (fileCreated) {
+                System.out.println("Order file created: " + orderFilePath);
+            } else {
+                System.out.println("Order file already exists: " + orderFilePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating order file: " + e.getMessage());
+        }
+    }
+
+    // If the voucherCode is null or equals "Add a voucher code", replace it with "none"
+    if (voucherCode == null || voucherCode.equals("Add a voucher code")) {
+        voucherCode = "none";
+    }
+
+    // Create the order details string (currentTime; orderId; total; voucherCode)
+    String orderDetails = currentTime + ";" + orderId + ";" + total + ";" + voucherCode;
+
+    // Write the order details to the order file
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(orderFile, true))) {
+        writer.write(orderDetails);
+        writer.newLine(); // Move to the next line after writing
+        System.out.println("Order details saved successfully to: " + orderFilePath);
+    } catch (IOException e) {
+        System.out.println("Error saving order details: " + e.getMessage());
+    }
+}
+
+
+
+    
+    private String generateOrderId() {
+    String orderId = "001"; // Default starting value
+    String orderIdFilePath = "src/OrderIdDetails/orderId.txt"; // File to store the last Order ID
+    File orderIdFile = new File(orderIdFilePath);
+
+    // Check if the order ID file exists
+    if (orderIdFile.exists()) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(orderIdFile))) {
+            String lastOrderIdStr = reader.readLine().trim();
+            // Validate the last order ID is a valid number
+            if (lastOrderIdStr != null && !lastOrderIdStr.isEmpty()) {
+                try {
+                    int lastOrderId = Integer.parseInt(lastOrderIdStr);
+                    // Increment and format as 3 digits
+                    orderId = String.format("%03d", lastOrderId + 1);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid last order ID format, resetting to default.");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading Order ID: " + e.getMessage());
+        }
+    } else {
+        // If the file doesn't exist, log the issue and use the default starting value
+        System.out.println("Order ID file does not exist, starting with default Order ID: " + orderId);
+    }
+
+    // Save the new Order ID back to the file
+    try (FileWriter writer = new FileWriter(orderIdFile)) {
+        writer.write(orderId);
+    } catch (IOException e) {
+        System.out.println("Error saving Order ID: " + e.getMessage());
+    }
+
+    return orderId;
+}
+
+    
     private void openReceipt(String filePath) {
         
         try {
@@ -1889,6 +2067,15 @@ public class MainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel59MouseClicked
 
+    private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
+        // TODO add your handling code here:
+        
+        jPanel11.setVisible(false);
+        jTabbedPane1.setSelectedIndex(2);
+        jLayeredPane1.setVisible(false);
+        
+    }//GEN-LAST:event_jPanel8MousePressed
+
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -1979,7 +2166,9 @@ public class MainMenu extends javax.swing.JFrame {
         return total;
     }
     
-    public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, String subtotal, String tax,String total, String totalWithVoucher, String voucherCode) {
+    public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, 
+                                 String subtotal, String tax, String total, String totalWithVoucher, 
+                                 String voucherCode, String orderId) {
     
         try {
             // Check if there is any data in the table
@@ -2031,16 +2220,15 @@ public class MainMenu extends javax.swing.JFrame {
         double taxValue = Double.parseDouble(tax.replace("RM", "").trim());
 
         // Get current date and time
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDateTime = now.format(formatter);
+        String currentTime = getCurrentTime();
 
         // Create and write to the receipt file
         try (FileWriter writer = new FileWriter(file)) {
             // Write receipt header
             writer.write("************* INDAH CAFETERIA SDN. BHD. ************\n");
             writer.write("********************* RECEIPT **********************\n");
-            writer.write("DATE/TIME: " + formattedDateTime + "\n"); // Add the real-time date and time
+            writer.write("DATE/TIME: " + currentTime + "\n"); // Add the real-time date and time
+            writer.write("ORDER ID: " + orderId + "\n");
             writer.write("TABLE NUMBER: " + tableNumber + "\n\n");
             writer.write("----------------------------------------------------\n");
             writer.write(String.format("%-20s %5s %12s %12s\n", "Item", "Qty", "Price/Unit", "Total"));
@@ -2098,6 +2286,11 @@ public class MainMenu extends javax.swing.JFrame {
         
         
 }
+    
+    public static String getCurrentTime() {
+    // Use SimpleDateFormat to format the current date and time
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    }
 
     
     // Method to apply voucher code
@@ -2285,8 +2478,11 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2300,10 +2496,13 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

@@ -1,0 +1,25 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+DATE/TIME: 13-01-2025 19:27:05
+ORDER ID: 001
+TABLE NUMBER: 5
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Burger                   2         4.00         8.00
+Fried Fries              1         2.50         2.50
+Fresh Orange             2         2.50         5.00
+Chocolate                1         7.90         7.90
+Green Tea                1         6.90         6.90
+Syrup Ice                3         1.50         4.50
+----------------------------------------------------
+Subtotal (before tax):               RM        32.71
+Tax (6%):                            RM         2.09
+Total (with tax):                    RM        31.32
+
+Voucher Applied:               DISCOUNT10
+Payment Method:                Online Banking
+
+****************************************************
+************** THANK YOU FOR COMING ****************

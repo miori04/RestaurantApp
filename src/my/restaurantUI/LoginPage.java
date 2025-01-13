@@ -378,12 +378,12 @@ public class LoginPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        // Fetch the input values from the email and password fields
-        String email = jTextField2.getText().trim(); // Get text from the email field and trim whitespace
-        String password = new String(jPasswordField1.getPassword()).trim(); // Get text from the password field and trim whitespace
+        String email = jTextField2.getText().trim();
+        String password = new String(jPasswordField1.getPassword()).trim();
 
         final String FILE_PATH = "src/DataFiles/LoginData.txt";
-        boolean isAuthenticated = false; // Flag to track login success
+        boolean isAuthenticated = false; 
+        String username = ""; // Variable to store the username
 
         try {
             FileReader fr = new FileReader(FILE_PATH);
@@ -393,15 +393,15 @@ public class LoginPage extends javax.swing.JFrame {
                 String line = read.nextLine();
                 StringTokenizer st = new StringTokenizer(line, ";");
 
-                if (st.countTokens() == 3) { // Ensure the line has exactly 3 tokens (fullname;email;password)
-                    st.nextToken(); // Skip the fullname field
+                if (st.countTokens() == 3) { 
+                    String fullname = st.nextToken(); // Retrieve the fullname
                     String storedEmail = st.nextToken();
                     String storedPassword = st.nextToken();
 
-                    // Check if the email and password match the expected values
                     if (email.equals(storedEmail) && password.equals(storedPassword)) {
                         isAuthenticated = true;
-                        break; // Exit the loop as soon as a match is found
+                        username = fullname; // Store the matched username
+                        break;
                     }
                 }
             }
@@ -410,13 +410,13 @@ public class LoginPage extends javax.swing.JFrame {
             fr.close();
 
             if (isAuthenticated) {
-                // Navigate to the HomePage if credentials are valid
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.setLocationRelativeTo(null); // Center the new frame
-                mainMenu.setVisible(true);           // Make the frame visible
-                this.dispose();                      // Close the current login frame
+            MainMenu mainMenu = new MainMenu();       // Create MainMenu instance
+            mainMenu.setUsername(username);          // Set the username
+            mainMenu.setLocationRelativeTo(null);    // Center the frame
+            mainMenu.setVisible(true);               // Show the MainMenu frame
+            this.dispose();                          // Close the login frame
+
             } else {
-                // If credentials don't match, show an error message
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid email or password!", "Login Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
 
