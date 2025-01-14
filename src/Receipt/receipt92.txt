@@ -1,0 +1,24 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+DATE/TIME: 2025-01-14 23:02:18
+ORDER ID: 051
+TABLE NUMBER: 1
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Fried Fries              2         2.50         5.00
+Burger                   2         4.00         8.00
+Syrup Ice                2         1.50         3.00
+----------------------------------------------------
+Subtotal (before tax):               RM        15.04
+Tax (6%):                            RM         0.96
+Total (with tax):                    RM        12.80
+
+Note: tanak sayur
+
+Voucher Applied:               DISCOUNT20
+Payment Method:                Cash
+
+****************************************************
+************** THANK YOU FOR COMING ****************
