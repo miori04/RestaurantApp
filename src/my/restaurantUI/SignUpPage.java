@@ -209,7 +209,7 @@ public class SignUpPage extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel5.setText("Full Name");
+        jLabel5.setText("Username");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(410, 60, 70, 20);
 
@@ -292,14 +292,14 @@ public class SignUpPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Get user input
-        String fullName = jTextField3.getText().trim();
+        String username = jTextField3.getText().trim();
         String email = jTextField2.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         String confirmPassword = new String(jPasswordField2.getPassword()).trim(); // Get confirmation password
-        String newEntry = fullName + ";" + email + ";" + password;
+        String newEntry = username + ";" + email + ";" + password;
 
         // Validate input
-        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }

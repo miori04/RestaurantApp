@@ -44,6 +44,16 @@ import java.util.Vector;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -63,56 +73,56 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents(); 
         
         // Add TableModelListener to jTable1
-    jTable1.getModel().addTableModelListener(new javax.swing.event.TableModelListener() {
-        @Override
-        public void tableChanged(javax.swing.event.TableModelEvent e) {
-            double total = calculateColumnTotal(jTable1, 2); // Column 1 for Price
-            double tax = 0.06 * total;
-            double subTotal = total - tax;
-            jTextField1.setText(String.format("RM %.2f", total));
-            jTextField2.setText(String.format("RM %.2f", tax));
-            jTextField3.setText(String.format("RM %.2f", subTotal));
-            
-             // Get the voucher code
-            String voucherCode = jTextField4.getText().trim();
-            
-            // Determine the discount percentage based on the voucher code
-            double discountPercentage = 0.0;
-            if ("DISCOUNT10".equalsIgnoreCase(voucherCode)) {
-                discountPercentage = 0.10; // 10% discount
-            } else if ("DISCOUNT20".equalsIgnoreCase(voucherCode)) {
-                discountPercentage = 0.20; // 20% discount
-            } else if ("DISCOUNT30".equalsIgnoreCase(voucherCode)) {
-                discountPercentage = 0.30; // 30% discount
-            }
-
-            // Update the total with voucher applied only if a valid voucher code is present
-            if (discountPercentage > 0) {
-                double totalWithVoucher = total * (1 - discountPercentage);
-                jTextField5.setText(String.format("RM %.2f", totalWithVoucher));
-            } else {
-                // If no valid voucher code, leave jTextField5 unchanged
-                jTextField5.setText("");
-            }
-        }
-    });
-    
-    // Apply custom cell renderer for "Price" column (column index 1)
-        jTable1.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
-            DecimalFormat df = new DecimalFormat("0.00"); // Format for 2 decimal places
-
+        jTable1.getModel().addTableModelListener(new javax.swing.event.TableModelListener() {
             @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel label = new JLabel();
-                if (value instanceof Number) {
-                    label.setText(df.format(value)); // Format value to 2 decimal places
-                } else {
-                    label.setText(value.toString());
+            public void tableChanged(javax.swing.event.TableModelEvent e) {
+                double total = calculateColumnTotal(jTable1, 2); // Column 1 for Price
+                double tax = 0.06 * total;
+                double subTotal = total - tax;
+                jTextField1.setText(String.format("RM %.2f", total));
+                jTextField2.setText(String.format("RM %.2f", tax));
+                jTextField3.setText(String.format("RM %.2f", subTotal));
+
+                 // Get the voucher code
+                String voucherCode = jTextField4.getText().trim();
+
+                // Determine the discount percentage based on the voucher code
+                double discountPercentage = 0.0;
+                if ("DISCOUNT10".equalsIgnoreCase(voucherCode)) {
+                    discountPercentage = 0.10; // 10% discount
+                } else if ("DISCOUNT20".equalsIgnoreCase(voucherCode)) {
+                    discountPercentage = 0.20; // 20% discount
+                } else if ("DISCOUNT30".equalsIgnoreCase(voucherCode)) {
+                    discountPercentage = 0.30; // 30% discount
                 }
-                label.setHorizontalAlignment(SwingConstants.RIGHT); // Right-align the text
-                return label;
+
+                // Update the total with voucher applied only if a valid voucher code is present
+                if (discountPercentage > 0) {
+                    double totalWithVoucher = total * (1 - discountPercentage);
+                    jTextField5.setText(String.format("RM %.2f", totalWithVoucher));
+                } else {
+                    // If no valid voucher code, leave jTextField5 unchanged
+                    jTextField5.setText("");
+                }
             }
         });
+
+        // Apply custom cell renderer for "Price" column (column index 1)
+            jTable1.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
+                DecimalFormat df = new DecimalFormat("0.00"); // Format for 2 decimal places
+
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JLabel label = new JLabel();
+                    if (value instanceof Number) {
+                        label.setText(df.format(value)); // Format value to 2 decimal places
+                    } else {
+                        label.setText(value.toString());
+                    }
+                    label.setHorizontalAlignment(SwingConstants.RIGHT); // Right-align the text
+                    return label;
+                }
+            });
     }
 
     /**
@@ -167,6 +177,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel47 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jButton39 = new javax.swing.JButton();
+        jLabel62 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -580,6 +592,20 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel62.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel62.setText("Note");
+
+        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(0, 51, 102));
+        jTextField6.setText("Add note");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -615,7 +641,11 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField5)))))
+                                    .addComponent(jTextField5))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField6)))))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -634,9 +664,9 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -650,7 +680,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel47))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,9 +704,13 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jButton39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(416, 416, 416))
+                    .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(385, 385, 385))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1722,7 +1756,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
-        
+
         // Path to the text file for item sales
         String filePath = "src/itemSales/itemSales.txt";
         String orderIdFilePath = "src/Orders/orderId.txt"; // File to store the last Order ID
@@ -1736,20 +1770,30 @@ public class MainMenu extends javax.swing.JFrame {
         String total = jTextField1.getText();
         String totalWithVoucher = jTextField5.getText();
         String voucherCode = jTextField4.getText();
+        String note = jTextField6.getText();
 
-        // Check if a voucher code is applied and update total accordingly
+        // Check if a voucher code is applied
         if (voucherCode == null || voucherCode.isEmpty()) {
             voucherCode = "none"; // If no voucher code, set to "none"
         }
 
+        
+        total = (total == null || total.isEmpty()) ? "0.00" : total;
+        totalWithVoucher = (totalWithVoucher == null || totalWithVoucher.isEmpty()) ? total : totalWithVoucher;
+        String totalToSave = (voucherCode.equals("none")) ? total : totalWithVoucher;
+
+        
+        // Determine the total to pass to saveOrderDetails
+        //String totalToSave = (voucherCode.equals("none")) ? total : totalWithVoucher;//
+
         // Get the current date and time using the getCurrentTime method
         String currentTime = getCurrentTime();
 
-        // Save order details with the additional time parameter
-        saveOrderDetails(orderId, total, totalWithVoucher, voucherCode, currentTime);
+        // Save order details with the adjusted total
+        saveOrderDetails(orderId, totalToSave, voucherCode, currentTime);
 
         // Call the method to print receipt and pass the Order ID
-        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode, orderId);
+        printReceipt(jTable1, jComboBox1, jComboBox2, subtotal, tax, total, totalWithVoucher, voucherCode, orderId, note);
 
         // DefaultTableModel model to manipulate the JTable
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -1813,76 +1857,83 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField3.setText(null); // Subtotal
         jTextField4.setText(null); // Voucher code
         jTextField5.setText(null); // Total with voucher applied
+        jTextField6.setText(null); // note
 
     }//GEN-LAST:event_jButton25ActionPerformed
 
-      private void saveOrderDetails(String orderId, String total, String totalWithVoucher, String voucherCode, String currentTime) {
-    // Retrieve the current user from jLabel61 (assumed to be the username)
-    String currentUser = jLabel61.getText();
+      private void saveOrderDetails(String orderId, String total, String voucherCode, String currentTime) {
+        // Retrieve the current user from jLabel61 (assumed to be the username)
+        String currentUser = jLabel61.getText();
 
-    // Define the path for the "Orders" folder
-    String ordersFolderPath = "Orders/";
-
-    // Define the folder path for the current user inside the "Orders" folder
-    String userFolderPath = ordersFolderPath + currentUser;  // Folder path for the current user
-    File userFolder = new File(userFolderPath);
-
-    // Check if the "Orders" folder exists, if not, create it
-    File ordersFolder = new File(ordersFolderPath);
-    if (!ordersFolder.exists()) {
-        boolean ordersFolderCreated = ordersFolder.mkdirs(); // Create the "Orders" folder if it doesn't exist
-        if (ordersFolderCreated) {
-            System.out.println("Orders folder created: " + ordersFolderPath);
-        } else {
-            System.out.println("Failed to create Orders folder: " + ordersFolderPath);
+        // Check if currentUser is null or empty, use "unknown" as the folder name
+        if (currentUser == null || currentUser.trim().isEmpty()) {
+            currentUser = "unknown";
         }
-    }
 
-    // Check if the folder for the current user exists, if not, create it
-    if (!userFolder.exists()) {
-        boolean userFolderCreated = userFolder.mkdirs(); // Create the folder for the current user if it doesn't exist
-        if (userFolderCreated) {
-            System.out.println("User folder created: " + userFolderPath);
-        } else {
-            System.out.println("Failed to create user folder: " + userFolderPath);
-        }
-    }
+        // Define the path for the "Orders" folder
+        String ordersFolderPath = "Orders/";
 
-    // Define the path for the order details text file inside the user's folder
-    String orderFilePath = userFolderPath + File.separator + orderId + ".txt";  // Order details file path
-    File orderFile = new File(orderFilePath);
+        // Define the folder path for the current user inside the "Orders" folder
+        String userFolderPath = ordersFolderPath + currentUser;
+        File userFolder = new File(userFolderPath);
 
-    // Check if the file exists, if not, create it
-    if (!orderFile.exists()) {
-        try {
-            boolean fileCreated = orderFile.createNewFile(); // Create the file for the order if it doesn't exist
-            if (fileCreated) {
-                System.out.println("Order file created: " + orderFilePath);
+        // Ensure the "Orders" folder exists
+        File ordersFolder = new File(ordersFolderPath);
+        if (!ordersFolder.exists()) {
+            boolean ordersFolderCreated = ordersFolder.mkdirs();
+            if (ordersFolderCreated) {
+                System.out.println("Orders folder created: " + ordersFolderPath);
             } else {
-                System.out.println("Order file already exists: " + orderFilePath);
+                System.out.println("Failed to create Orders folder: " + ordersFolderPath);
             }
+        }
+
+        // Ensure the folder for the current user exists
+        if (!userFolder.exists()) {
+            boolean userFolderCreated = userFolder.mkdirs();
+            if (userFolderCreated) {
+                System.out.println("User folder created: " + userFolderPath);
+            } else {
+                System.out.println("Failed to create user folder: " + userFolderPath);
+            }
+        }
+
+        // Define the path for the order details text file
+        String orderFilePath = userFolderPath + File.separator + orderId + ".txt";
+        File orderFile = new File(orderFilePath);
+
+        // Ensure the order file exists
+        if (!orderFile.exists()) {
+            try {
+                boolean fileCreated = orderFile.createNewFile();
+                if (fileCreated) {
+                    System.out.println("Order file created: " + orderFilePath);
+                } else {
+                    System.out.println("Order file already exists: " + orderFilePath);
+                }
+            } catch (IOException e) {
+                System.out.println("Error creating order file: " + e.getMessage());
+            }
+        }
+
+        // Handle the voucherCode
+        if (voucherCode == null || voucherCode.equals("Add a voucher code")) {
+            voucherCode = "none";
+        }
+
+        // Create the order details string
+        String orderDetails = currentTime + ";" + orderId + ";" + total + ";" + voucherCode;
+
+        // Write the order details to the order file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(orderFile, true))) {
+            writer.write(orderDetails);
+            writer.newLine();
+            System.out.println("Order details saved successfully to: " + orderFilePath);
         } catch (IOException e) {
-            System.out.println("Error creating order file: " + e.getMessage());
+            System.out.println("Error saving order details: " + e.getMessage());
         }
     }
 
-    // If the voucherCode is null or equals "Add a voucher code", replace it with "none"
-    if (voucherCode == null || voucherCode.equals("Add a voucher code")) {
-        voucherCode = "none";
-    }
-
-    // Create the order details string (currentTime; orderId; total; voucherCode)
-    String orderDetails = currentTime + ";" + orderId + ";" + total + ";" + voucherCode;
-
-    // Write the order details to the order file
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(orderFile, true))) {
-        writer.write(orderDetails);
-        writer.newLine(); // Move to the next line after writing
-        System.out.println("Order details saved successfully to: " + orderFilePath);
-    } catch (IOException e) {
-        System.out.println("Error saving order details: " + e.getMessage());
-    }
-}
 
 
 
@@ -2070,11 +2121,23 @@ public class MainMenu extends javax.swing.JFrame {
     private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
         // TODO add your handling code here:
         
+        // Hide panel 11
         jPanel11.setVisible(false);
+
+        // Set tabbed pane to the appropriate index
         jTabbedPane1.setSelectedIndex(2);
+
+        // Hide the layered pane
         jLayeredPane1.setVisible(false);
+
+        // Display order history in jTable2
+        displayOrderHistory();
         
     }//GEN-LAST:event_jPanel8MousePressed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
@@ -2168,7 +2231,7 @@ public class MainMenu extends javax.swing.JFrame {
     
     public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, 
                                  String subtotal, String tax, String total, String totalWithVoucher, 
-                                 String voucherCode, String orderId) {
+                                 String voucherCode, String orderId, String note) {
     
         try {
             // Check if there is any data in the table
@@ -2251,9 +2314,11 @@ public class MainMenu extends javax.swing.JFrame {
             writer.write(String.format("%-30s %8s %12.2f\n", "Subtotal (before tax):", "RM", subtotalValue));
             writer.write(String.format("%-30s %8s %12.2f\n", "Tax (6%):", "RM", taxValue));
             writer.write(String.format("%-30s %8s %12.2f\n\n", "Total (with tax):", "RM", totalValue));
+            writer.write(String.format("Note: %s\n\n", note));
             if (!voucherCode.isEmpty()) {
                 writer.write(String.format("%-30s %s\n", "Voucher Applied:", voucherCode));
             }
+            
             writer.write(String.format("%-30s %s\n\n", "Payment Method:", payMethod));
             writer.write("****************************************************\n");
             writer.write("************** THANK YOU FOR COMING ****************\n");
@@ -2331,13 +2396,79 @@ public class MainMenu extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null, "Voucher code has been applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
 }
 
+    private void displayOrderHistory() {
+        // Retrieve the current user from jLabel61 (assumed to be the username)
+        String currentUser = jLabel61.getText();
+
+        // Check if currentUser is null or empty, use "unknown" as the folder name
+        if (currentUser == null || currentUser.trim().isEmpty()) {
+            currentUser = "unknown";
+        }
+
+        // Define the path for the "Orders" folder
+        String ordersFolderPath = "Orders/";
+        File userFolder = new File(ordersFolderPath + currentUser);
+
+        // Check if the folder exists for the currentUser
+        if (!userFolder.exists() || !userFolder.isDirectory()) {
+            System.out.println("No order history found for user: " + currentUser);
+            return;
+        }
+
+        // Create a list to store order details
+        List<String[]> orderList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // Retrieve order files in the user's folder
+        File[] orderFiles = userFolder.listFiles((dir, name) -> name.endsWith(".txt"));
+        if (orderFiles != null) {
+            for (File orderFile : orderFiles) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(orderFile))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        // Split the order details by ";"
+                        String[] orderDetails = line.split(";");
+                        if (orderDetails.length == 4) {
+                            // Validate the date format
+                            try {
+                                dateFormat.parse(orderDetails[0]); // Parse to ensure it's a valid date
+                                orderList.add(orderDetails); // Add to the list if valid
+                            } catch (ParseException e) {
+                                System.out.println("Invalid date format in file: " + orderFile.getName());
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error reading order file: " + orderFile.getName() + " - " + e.getMessage());
+                }
+            }
+        }
+
+        // Sort the list by date in descending order
+        orderList.sort((o1, o2) -> {
+            try {
+                Date date1 = dateFormat.parse(o1[0]);
+                Date date2 = dateFormat.parse(o2[0]);
+                return date2.compareTo(date1); // Descending order
+            } catch (ParseException e) {
+                return 0;
+            }
+        });
+
+        // Create a table model for jTable2
+        DefaultTableModel tableModel = new DefaultTableModel(new String[]{"Order Date", "Order ID", "Total", "Voucher Applied"}, 0);
+
+        // Add sorted orders to the table model
+        for (String[] order : orderList) {
+            tableModel.addRow(order);
+        }
+
+        // Set the model to jTable2
+        jTable2.setModel(tableModel);
+    }
 
 
-
-
-
-
-    
+   
 
 
 
@@ -2483,6 +2614,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2508,6 +2640,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
 
