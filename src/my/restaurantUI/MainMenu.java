@@ -260,6 +260,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel58 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton40 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -434,7 +435,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(0, 51, 102));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("Order");
+        jLabel28.setText("Orders");
         jPanel11.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 441, 160, -1));
 
         jLabel61.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -1529,15 +1530,27 @@ public class MainMenu extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jButton40.setBackground(new java.awt.Color(255, 255, 255));
+        jButton40.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton40.setForeground(new java.awt.Color(0, 51, 102));
+        jButton40.setText("Open Receipt");
+        jButton40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton40ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -1547,7 +1560,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(420, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Order Menu", jPanel5);
@@ -2139,6 +2154,12 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
+        // TODO add your handling code here:
+        
+        openReceiptFromSelectedRow();
+    }//GEN-LAST:event_jButton40ActionPerformed
+
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -2255,11 +2276,12 @@ public class MainMenu extends javax.swing.JFrame {
             directory.mkdirs();
         }
 
-        // Generate incremented receipt filename
+        // Generate incremented receipt filename with order ID
         int receiptNumber = 1;
         File file;
         do {
-            file = new File(directoryPath + "receipt" + receiptNumber + ".txt");
+            String formattedOrderId = orderId != null && !orderId.isEmpty() ? orderId.replaceAll("\\D", "") : "000"; // Sanitize order ID
+            file = new File(directoryPath + String.format("receipt%d_%s.txt", receiptNumber, formattedOrderId));
             receiptNumber++;
         } while (file.exists());
 
@@ -2467,7 +2489,50 @@ public class MainMenu extends javax.swing.JFrame {
         jTable2.setModel(tableModel);
     }
 
+    // Method to handle opening the receipt file
+    private void openReceiptFromSelectedRow() {
+        // Get the selected row
+        int selectedRow = jTable2.getSelectedRow();
 
+        if (selectedRow != -1) {
+            // Get the order ID from column 2 (index 1 in zero-based indexing)
+            String orderId = jTable2.getValueAt(selectedRow, 1).toString();
+
+            // Define the path for receipt files
+            String receiptFolderPath = "src/Receipt";
+
+            // Search for the receipt file with the format "receipt(no)_(order ID).txt"
+            File receiptFolder = new File(receiptFolderPath);
+            File[] files = receiptFolder.listFiles((dir, name) -> name.contains("_" + orderId + ".txt"));
+
+            if (files != null && files.length > 0) {
+                // Open the first matching file
+                File receiptFile = files[0];
+
+                try {
+                    // Use Desktop to open the file
+                    Desktop desktop = Desktop.getDesktop();
+                    if (receiptFile.exists() && desktop.isSupported(Desktop.Action.OPEN)) {
+                        desktop.open(receiptFile);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Receipt file not found or cannot be opened.", 
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "An error occurred while opening the receipt file: " 
+                            + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No receipt file found for Order ID: " + orderId, 
+                        "File Not Found", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row in the table.", 
+                    "No Row Selected", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    
    
 
 
@@ -2549,6 +2614,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton38;
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton40;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
