@@ -1,12 +1,12 @@
-Burger;104;416.0
+Burger;108;432.0
 Fried Rice;15;75.0
-Tea O Ice;25;50.0
+Tea O Ice;26;52.0
 Fish and Chips;11;86.89999999999999
 Syrup Ice;16;24.0
-Fresh Orange;18;45.0
+Fresh Orange;20;50.0
 Fried Fries;55;137.5
-Chicken Chop;14;112.0
-Chocolate;19;150.10000000000002
-Milo Ice;9;27.0
-Chicken Rice;21;136.5
-Green Tea;16;110.4
+Chicken Chop;17;136.0
+Chocolate;21;165.90000000000003
+Milo Ice;10;30.0
+Chicken Rice;24;156.0
+Green Tea;18;124.2
