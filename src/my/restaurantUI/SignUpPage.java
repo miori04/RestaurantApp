@@ -288,10 +288,11 @@ public class SignUpPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Method for Sign Up button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        // Get user input
+        // Get user input from the textfield and passwordfield
         String username = jTextField3.getText().trim();
         String email = jTextField2.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
@@ -336,6 +337,7 @@ public class SignUpPage extends javax.swing.JFrame {
         }
 
         // Append the new entry if no duplicate is found
+        // write the new user details into the text file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(newEntry);
             writer.newLine(); // Add a new line
@@ -348,11 +350,11 @@ public class SignUpPage extends javax.swing.JFrame {
         // Show success message
         JOptionPane.showMessageDialog(this, "You have successfully signed up! You can now log in.", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        // Clear the fields
+        // Clear the fields after successfully sign up
         jTextField3.setText("");
         jTextField2.setText("");
         jPasswordField1.setText("");
-        jPasswordField2.setText(""); // Clear the confirmation password field
+        jPasswordField2.setText(""); 
 
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -361,20 +363,16 @@ public class SignUpPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
+    
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-
-        SignUpPage signUpPage = new SignUpPage();
-        signUpPage.setLocationRelativeTo(null);
-        signUpPage.setVisible(true);
-        this.dispose(); // Close the current page
-
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    // Method for login page button
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         

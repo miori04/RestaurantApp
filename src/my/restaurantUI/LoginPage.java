@@ -375,15 +375,16 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
+    // Method for login button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        String email = jTextField2.getText().trim();
-        String password = new String(jPasswordField1.getPassword()).trim();
+        String email = jTextField2.getText().trim(); // retrieve email from jTextField2
+        String password = new String(jPasswordField1.getPassword()).trim(); // retrieve password from jTextField1
 
-        final String FILE_PATH = "src/DataFiles/LoginData.txt";
-        boolean isAuthenticated = false; 
-        String username = ""; // Variable to store the username
+        final String FILE_PATH = "src/DataFiles/LoginData.txt"; //location of text file contains login details for the system
+        boolean isAuthenticated = false; // variable to check if user is successfully loggged in
+        String currentUsername = ""; // Variable to store the username
 
         try {
             FileReader fr = new FileReader(FILE_PATH);
@@ -394,13 +395,13 @@ public class LoginPage extends javax.swing.JFrame {
                 StringTokenizer st = new StringTokenizer(line, ";");
 
                 if (st.countTokens() == 3) { 
-                    String fullname = st.nextToken(); // Retrieve the fullname
-                    String storedEmail = st.nextToken();
+                    String username = st.nextToken(); // Retrieve fullname from textFile
+                    String storedEmail = st.nextToken();// Retrieve 
                     String storedPassword = st.nextToken();
 
                     if (email.equals(storedEmail) && password.equals(storedPassword)) {
                         isAuthenticated = true;
-                        username = fullname; // Store the matched username
+                        currentUsername = username; // Store the matched username
                         break;
                     }
                 }
@@ -410,8 +411,8 @@ public class LoginPage extends javax.swing.JFrame {
             fr.close();
 
             if (isAuthenticated) {
-            MainMenu mainMenu = new MainMenu();       // Create MainMenu instance
-            mainMenu.setUsername(username);          // Set the username
+            MainMenu mainMenu = new MainMenu();      // Create MainMenu instance
+            mainMenu.setUsername(currentUsername);   // Set the username
             mainMenu.setLocationRelativeTo(null);    // Center the frame
             mainMenu.setVisible(true);               // Show the MainMenu frame
             this.dispose();                          // Close the login frame
@@ -434,6 +435,7 @@ public class LoginPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // method for display the sign up page
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
@@ -442,18 +444,13 @@ public class LoginPage extends javax.swing.JFrame {
         signUpPage.setLocationRelativeTo(null); // Center the new frame
         signUpPage.setVisible(true);
 
-        // Close the current frame (optional)
+        // Close the current frame
         this.dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-
-        SignUpPage signUpPage = new SignUpPage();
-        signUpPage.setLocationRelativeTo(null);
-        signUpPage.setVisible(true);
-        this.dispose(); // Close the current page
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
@@ -517,34 +514,6 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginFrame.setVisible(true);           // Make the frame visible
             }
         });
-        try
-        {    
-        FileReader fr = new FileReader("LoginData.txt");
-        Scanner read = new Scanner(fr);
-        
-        while(read.hasNextLine())
-        {
-            String line = read.nextLine();
-            StringTokenizer st = new StringTokenizer(line, ";");
-            String email = st.nextToken();
-            String password = st.nextToken();
-            
-            
-        }
-            
-        fr.close();
-        
-        }
-        
-        catch(IOException ex)
-        {
-            System.out.println("error: " + ex.toString());
-        }
-        
-        catch(Exception ex)
-        {
-            System.out.println("error: " + ex.toString());
-        }
         
     }
 

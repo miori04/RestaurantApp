@@ -5,45 +5,16 @@
 package my.restaurantUI;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.text.DecimalFormat;
-import java.io.*;
-
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.JOptionPane;
-import javax.swing.JFileChooser;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.Vector;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -56,8 +27,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
-
-
 /**
  *
  * @author mior
@@ -67,7 +36,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
-    private String username; // Variable to store the username
+
     
     public MainMenu() {
         initComponents(); 
@@ -75,6 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
         // Add TableModelListener to jTable1
         jTable1.getModel().addTableModelListener(new javax.swing.event.TableModelListener() {
             @Override
+            // total, tax, subTotal will update automatically each time there iss a changes in jTable1
             public void tableChanged(javax.swing.event.TableModelEvent e) {
                 double total = calculateColumnTotal(jTable1, 2); // Column 1 for Price
                 double tax = 0.06 * total;
@@ -1660,14 +1630,14 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
-        // TODO add your handling code here:
+
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(0);
         jLayeredPane1.setVisible(true);
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void jPanel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MousePressed
-        // TODO add your handling code here:
+
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(1);
         jLayeredPane1.setVisible(true);
@@ -1675,8 +1645,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel7MousePressed
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        // TODO add your handling code here:
-        
+
         jPanel11.setVisible(true);
         
     }//GEN-LAST:event_jLabel12MousePressed
@@ -1686,146 +1655,145 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        // TODO add your handling code here:
+
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        // TODO add your handling code here:
+
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
-        // TODO add your handling code here:
+
         jPanel11.setVisible(false);
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jLabel25MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Burger", 1, 4.00);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Fried Fries", 1, 2.50);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Chicken Chop", 1, 8.00);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Fried Rice", 1, 5.00);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Burger", 1);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Burger");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Fried Rice", 1);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Fried Rice");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Chicken Chop", 1);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Chicken Chop");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Fried Fries", 1);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Fried Fries");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Milo Ice", 1, 3.00);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Milo Ice", 1);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Milo Ice");
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Syrup Ice", 1, 1.50);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Syrup Ice", 1);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Syrup Ice");
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Tea O Ice", 1, 2.00);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Tea O Ice", 1);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Tea O Ice");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Fresh Orange", 1, 2.50);
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
+
         decreaseQuantity("Fresh Orange", 1);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        // TODO add your handling code here:
+
         deleteRow("Fresh Orange");
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-        
+ 
         // Specify the column index for the "Price" column
         int priceColumnIndex = 2; // Assuming "Price" is in column index 1
 
@@ -1841,11 +1809,10 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    // Method for Finish Order button
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
 
-        // Path to the text file for item sales
-        String filePath = "src/itemSales/itemSales.txt";
         String orderIdFilePath = "src/Orders/orderId.txt"; // File to store the last Order ID
 
         // Generate a new Order ID
@@ -1869,10 +1836,6 @@ public class MainMenu extends javax.swing.JFrame {
         totalWithVoucher = (totalWithVoucher == null || totalWithVoucher.isEmpty()) ? total : totalWithVoucher;
         String totalToSave = (voucherCode.equals("none")) ? total : totalWithVoucher;
 
-        
-        // Determine the total to pass to saveOrderDetails
-        //String totalToSave = (voucherCode.equals("none")) ? total : totalWithVoucher;//
-
         // Get the current date and time using the getCurrentTime method
         String currentTime = getCurrentTime();
 
@@ -1884,56 +1847,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         // DefaultTableModel model to manipulate the JTable
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        // Create a map to store the data for item sales
-        Map<String, String[]> itemSalesMap = new HashMap<>();
-
-        // Load existing data from the file
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts.length == 3) {
-                    String productName = parts[0];
-                    int quantity = Integer.parseInt(parts[1]);
-                    double price = Double.parseDouble(parts[2]);
-                    itemSalesMap.put(productName, new String[]{String.valueOf(quantity), String.valueOf(price)});
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("File not found or cannot be read.");
-        }
-
-        // Update map with data from jTable1
-        for (int row = 0; row < model.getRowCount(); row++) {
-            String productName = model.getValueAt(row, 0).toString();
-            int quantity = Integer.parseInt(model.getValueAt(row, 1).toString());
-            double price = Double.parseDouble(model.getValueAt(row, 2).toString());
-
-            if (itemSalesMap.containsKey(productName)) {
-                // Update existing entry
-                String[] existingData = itemSalesMap.get(productName);
-                int updatedQuantity = Integer.parseInt(existingData[0]) + quantity;
-                double updatedPrice = Double.parseDouble(existingData[1]) + price;
-                itemSalesMap.put(productName, new String[]{String.valueOf(updatedQuantity), String.valueOf(updatedPrice)});
-            } else {
-                // Add new entry
-                itemSalesMap.put(productName, new String[]{String.valueOf(quantity), String.valueOf(price)});
-            }
-        }
-
-        // Write sorted data back to the file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
-            for (Map.Entry<String, String[]> entry : itemSalesMap.entrySet()) {
-                String productName = entry.getKey();
-                String quantity = entry.getValue()[0];
-                String price = entry.getValue()[1];
-                writer.write(productName + ";" + quantity + ";" + price);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error writing to file.");
-        }
 
         // Remove all rows from the table
         model.setRowCount(0);
@@ -1948,6 +1861,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton25ActionPerformed
 
+    // Method to save order details for the user, so that user can view in order history
       private void saveOrderDetails(String orderId, String total, String voucherCode, String currentTime) {
         // Retrieve the current user from jLabel61 (assumed to be the username)
         String currentUser = jLabel61.getText();
@@ -2021,10 +1935,8 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }
 
-
-
-
-    
+      
+    // Method for generate orderId with incremented 1 each time has new order
     private String generateOrderId() {
     String orderId = "001"; // Default starting value
     String orderIdFilePath = "src/OrderIdDetails/orderId.txt"; // File to store the last Order ID
@@ -2062,7 +1974,7 @@ public class MainMenu extends javax.swing.JFrame {
     return orderId;
 }
 
-    
+    // Method for open receipt file that has just been created
     private void openReceipt(String filePath) {
         
         try {
@@ -2079,8 +1991,9 @@ public class MainMenu extends javax.swing.JFrame {
 
     }
     
+    // Method for applying the voucher code
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
+
         applyVoucher();
     }//GEN-LAST:event_jButton26ActionPerformed
 
@@ -2089,7 +2002,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
+
         addOrUpdateRow("Chicken Rice", 1, 6.50);
     }//GEN-LAST:event_jButton27ActionPerformed
 
@@ -2157,54 +2070,55 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    // Method for reset all the orders in jTable1
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
-        // TODO add your handling code here:
-        
+    
         // Confirm reset action
-    int confirm = JOptionPane.showConfirmDialog(
-        null,
-        "Are you sure you want to clear all orders?",
-        "Reset Order",
-        JOptionPane.YES_NO_OPTION
-    );
+        int confirm = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to clear all orders?",
+            "Reset Order",
+            JOptionPane.YES_NO_OPTION
+        );
 
-    // If user confirms, clear the table
-    if (confirm == JOptionPane.YES_OPTION) {
-        // Get the table model
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        // If user confirms, clear the table
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Get the table model
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        // Remove all rows
-        model.setRowCount(0);
+            // Remove all rows
+            model.setRowCount(0);
 
-        // Reset other fields, if needed
-        jTextField1.setText(null); // Total
-        jTextField2.setText(null); // Tax
-        jTextField3.setText(null); // Subtotal
-        jTextField4.setText(null); // Voucher code
-        jTextField5.setText(null); // Total with voucher applied
+            // Reset other fields, if needed
+            jTextField1.setText(null); // Total
+            jTextField2.setText(null); // Tax
+            jTextField3.setText(null); // Subtotal
+            jTextField4.setText(null); // Voucher code
+            jTextField5.setText(null); // Total with voucher applied
 
-        // Show success message
-        JOptionPane.showMessageDialog(null, "All orders have been cleared!", "Reset Successful", JOptionPane.INFORMATION_MESSAGE);
-    }
+            // Show success message
+            JOptionPane.showMessageDialog(null, "All orders have been cleared!", "Reset Successful", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton39ActionPerformed
 
+    // Method for Log Out Button, user can log out and go back to login page
     private void jLabel59MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel59MouseClicked
-        // TODO add your handling code here:
-        
+     
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout Confirmation", JOptionPane.YES_NO_OPTION);
-    if (choice == JOptionPane.YES_OPTION) {
-        // Create and display the login frame
-        LoginPage LoginFrame = new LoginPage();
-        LoginFrame.pack();
-        LoginFrame.setLocationRelativeTo(null);
-        LoginFrame.setVisible(true);
+        if (choice == JOptionPane.YES_OPTION) {
+            // Create and display the login frame
+            LoginPage LoginFrame = new LoginPage();
+            LoginFrame.pack();
+            LoginFrame.setLocationRelativeTo(null);
+            LoginFrame.setVisible(true);
 
-        // Close the current frame
-        this.dispose();
-    }
+            // Close the current frame
+            this.dispose();
+        }
         
     }//GEN-LAST:event_jLabel59MouseClicked
 
+    // Method for go to Orders tab page
     private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
         // TODO add your handling code here:
         
@@ -2226,12 +2140,14 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    // Method for opening receipt for the selected row table in Orders tab page
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
         // TODO add your handling code here:
         
         openReceiptFromSelectedRow();
     }//GEN-LAST:event_jButton40ActionPerformed
 
+    // Method for go to About Us tab page
     private void jPanel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MousePressed
         // TODO add your handling code here:
         
@@ -2246,6 +2162,7 @@ public class MainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jPanel9MousePressed
 
+    // Method for add food/drink to the jTable1
     private void addOrUpdateRow(String productName, int quantity, double pricePerUnit) {
     // Get the table's model
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -2275,7 +2192,7 @@ public class MainMenu extends javax.swing.JFrame {
         model.addRow(new Object[]{productName, quantity, pricePerUnit});
     }
 }
-    
+    // Method for decrease 1 for food/drink that already in the jTable1
     private void decreaseQuantity(String productName, int decreaseBy) {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
@@ -2302,6 +2219,7 @@ public class MainMenu extends javax.swing.JFrame {
     }
 }
     
+    // Method for delete the food/drink from the jTable1
     private void deleteRow(String productName) {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
@@ -2314,7 +2232,7 @@ public class MainMenu extends javax.swing.JFrame {
     }
 }
     
-    // Method to calculate the total of a column in a JTable
+    // Method to calculate the total of a column in a JTable1
     double calculateColumnTotal(JTable table, int columnIndex) {
         double total = 0.0;
 
@@ -2336,6 +2254,7 @@ public class MainMenu extends javax.swing.JFrame {
         return total;
     }
     
+    // Method for print receipt of the order to be displayed in the text file 
     public static void printReceipt(JTable table, JComboBox<String> tableNumberComboBox, JComboBox<String> payMethodComboBox, 
                                  String subtotal, String tax, String total, String totalWithVoucher, 
                                  String voucherCode, String orderId, String note) {
@@ -2460,6 +2379,7 @@ public class MainMenu extends javax.swing.JFrame {
         
 }
     
+    // Method to get the current Time for the receipt and order Details
     public static String getCurrentTime() {
     // Use SimpleDateFormat to format the current date and time
     return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -2504,6 +2424,7 @@ public class MainMenu extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null, "Voucher code has been applied!", "Success", JOptionPane.INFORMATION_MESSAGE);
 }
 
+    // Method to display the order history of the user in the jTable2 in Orders tab page
     private void displayOrderHistory() {
         // Retrieve the current user from jLabel61 (assumed to be the username)
         String currentUser = jLabel61.getText();
@@ -2617,11 +2538,6 @@ public class MainMenu extends javax.swing.JFrame {
                     "No Row Selected", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
-    
-   
-
-
 
     
     /**

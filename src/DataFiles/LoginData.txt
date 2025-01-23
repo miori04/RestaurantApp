@@ -4,3 +4,4 @@ qasthal;qasthal33@gmail.com;11223
 syamil;syamil1@gmail.com;syamil1
 amri;amri4@gmail.com;amri4
 haikal;haikal5@gmail.com;haikal5
+james;jamesbond1@gmail.com;james123
