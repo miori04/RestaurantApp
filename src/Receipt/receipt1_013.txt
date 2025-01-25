@@ -1,0 +1,28 @@
+************* INDAH CAFETERIA SDN. BHD. ************
+********************* RECEIPT **********************
+DATE/TIME: 2025-01-25 20:20:22
+ORDER ID: 013
+TABLE NUMBER: 7
+
+----------------------------------------------------
+Item                   Qty   Price/Unit        Total
+----------------------------------------------------
+Burger                   2         4.00         8.00
+Fried Fries              2         2.50         5.00
+Fried Rice               2         5.00        10.00
+Milo Ice                 2         3.00         6.00
+Syrup Ice                1         1.50         1.50
+Fresh Orange             2         2.50         5.00
+Chocolate                1         7.90         7.90
+----------------------------------------------------
+Subtotal (before tax):               RM        40.80
+Tax (6%):                            RM         2.60
+Total (with tax):                    RM        30.38
+
+Note: Fried Rice - no vege
+
+Voucher Applied:               DISCOUNT30
+Payment Method:                E-Wallet 
+
+****************************************************
+************** THANK YOU FOR COMING ****************

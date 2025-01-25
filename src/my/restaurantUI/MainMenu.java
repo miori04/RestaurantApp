@@ -1668,8 +1668,17 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
 
+        // Hide the layered pane
+        jLayeredPane1.setVisible(false);
+        
+         // Hide panel 11
         jPanel11.setVisible(false);
+
+        // Set tabbed pane to the appropriate index
         jTabbedPane1.setSelectedIndex(2);
+
+        // Display order history in jTable2
+        displayOrderHistory();
     }//GEN-LAST:event_jLabel25MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2120,7 +2129,6 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Method for go to Orders tab page
     private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
-        // TODO add your handling code here:
         
         // Hide panel 11
         jPanel11.setVisible(false);
