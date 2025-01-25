@@ -290,7 +290,6 @@ public class SignUpPage extends javax.swing.JFrame {
 
     // Method for Sign Up button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         
         // Get user input from the textfield and passwordfield
         String username = jTextField3.getText().trim();
